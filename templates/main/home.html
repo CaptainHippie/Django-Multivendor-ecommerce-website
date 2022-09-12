@@ -14,7 +14,7 @@
                                 <div class="col-xl-5">
                                     <div class="slider-content">
                                         <div class="slider-top-btn" data-animation="fadeInLeft" data-delay="1.5s">
-                                            <a href="product-details.html" class="st-btn b-radius">{{i.Discount_deal}}</a>
+                                            <a href="{% url 'product' %}" class="st-btn b-radius">{{i.Discount_deal}}</a>
                                         </div>
                                         <h2 data-animation="fadeInLeft" data-delay="1.7s" class="pt-15 slider-title pb-5">SALE {{i.Sale}}% OFF <br> {{i.Brand_name}}</h2>
                                         <p class="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.9s">Discount {{i.Discount}}% On Products & Free Shipping</p>
@@ -94,7 +94,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="banner__item p-relative w-img mb-30">
                             <div class="banner__img">
-                                <a href="product-details.html"><img src="/{{i.Image}}" alt=""></a>
+                                <a href="{% url 'product' %}"><img src="/{{i.Image}}" alt=""></a>
                             </div>
                             <div class="banner__content">
                                 <h6><a href="{{i.Link}}">{{i.Discount_deal}} <br>{{i.Quote}}</a></h6>
@@ -166,7 +166,7 @@
                                         </div>
                                     </div>
                                     <div class="product__content">
-                                        <h6><a href="product-details.html">{{item.name|truncatewords:12}}</a></h6>
+                                        <h6><a href="{{item.get_absolute_url}}">{{item.name|truncatewords:12}}</a></h6>
                                         <div class="rating mb-5">
                                             <ul>
                                                 <li><a href="#"><i class="fal fa-star"></i></a></li>

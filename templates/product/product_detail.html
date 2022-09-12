@@ -45,7 +45,7 @@
                                 {% for obj in product.product_image_set.all %}
                                 <div class="tab-pane fade show" id="thumb{{obj.id}}" role="tabpanel" aria-labelledby="thumb{{obj.id}}-tab">
                                     <div class="product__details-nav-thumb w-img">
-                                        <img src="{{obj.image_url}}" alt="">
+                                        <img src="{{obj.image_url}}" alt="" style="max-width:545px;max-height:715px">
                                     </div>
                                 </div>
                                 {% endfor %}
