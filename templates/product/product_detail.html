@@ -71,19 +71,24 @@
                             <span>₹{{product.price}}</span>
                         </div>
                         <div class="features-des mb-20 mt-10">
-                            <ul>
-                                <li><a href="product-details.html">{{product.product_information|safe}}</a></li>
+                            <ul>S
+                                <li>{{product.product_information|safe}}</li>
                             </ul>
                         </div>
                         <div class="product-stock mb-20">
                             <h5>Availability: <span> {{product.availability}} in stock</span></h5>
                         </div>
+
+                        <form action="{% url 'cart_add' product.id %}" method="POST">
+                            {% csrf_token %}
                         <div class="cart-option mb-15">
                             <div class="product-quantity mr-20">
-                                <div class="cart-plus-minus p-relative"><input type="text" value="1"><div class="dec qtybutton">-</div><div class="inc qtybutton">+</div></div>
+                                <div class="cart-plus-minus p-relative"><input type="number" value="1" name="qty"><div class="dec qtybutton">-</div><div class="inc qtybutton">+</div></div>
                             </div>
-                            <a href="cart.html" class="cart-btn">Add to Cart</a>
+                            <button class="cart-btn" type="submit">Add to Cart</button>
                         </div>
+                        </form>
+                        
                         <div class="details-meta">
                             <div class="d-meta-left">
                                 <div class="dm-item mr-20">
@@ -135,9 +140,9 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="aditional-tab" data-bs-toggle="tab" data-bs-target="#aditional" type="button" role="tab" aria-controls="aditional" aria-selected="false">Additional information</button>
                               </li>
-                            <li class="nav-item" role="presentation">
+                            <!--li class="nav-item" role="presentation">
                               <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">Reviews (1) </button>
-                            </li>
+                            </li-->
                           </ul>
                     </div>
                 </div>
@@ -160,7 +165,8 @@
                         </ul>
                      </div>
                 </div>
-                <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+
+                <!--div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                     <div class="product__details-review">
                         <div class="row">
                             <div class="col-xl-4">
@@ -260,7 +266,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div-->
             </div>
         </div>
     </div>

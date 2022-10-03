@@ -1,3 +1,4 @@
+from pickle import TRUE
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
@@ -79,7 +80,8 @@ class Product(models.Model):
     packing_cost = models.IntegerField(null=True)
     product_information = RichTextField(null=True)
     model_name = models.CharField(max_length=100)
-    categories = models.ForeignKey(Category, on_delete=models.CASCADE)
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    sub_cat = models.ForeignKey(Sub_Category, on_delete=models.CASCADE, null=True)
     color = models.ForeignKey(Color, on_delete=models.CASCADE, null=True)
     tags = models.CharField(max_length=100)
     description = RichTextField()

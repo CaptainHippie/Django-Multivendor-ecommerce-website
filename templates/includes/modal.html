@@ -20,7 +20,7 @@
         </div>
         {% endif %}
         <div class="block-wishlist action">
-            <a class="icon-link" href="wishlist.html">
+            <a class="icon-link" href="#">
             <i class="flaticon-heart"></i>
             <span class="count">0</span>
             <span class="text">
@@ -50,12 +50,12 @@
                           <div class="cart__item d-flex justify-content-between align-items-center">
                             <div class="cart__inner d-flex">
                               <div class="cart__thumb">
-                                <a href="product-details.html">
+                                <a href="{% url 'product_detail' value.link %}">
                                   <img src="{{value.image}}" alt="">
                                 </a>
                               </div>
                               <div class="cart__details">
-                                <h6><a href="product-details.html">{{value.name|truncatechars:40}}</a></h6>
+                                <h6><a href="{% url 'product_detail' value.link %}">{{value.name|truncatechars:40}}</a></h6>
                                 <div class="cart__price">
                                   <span>₹ {{value.price}} X {{value.quantity}}</span>
                                 </div>
@@ -75,7 +75,7 @@
                         </li>
                         <li>
                             <a href="{% url 'cart_detail' %}" class="wc-cart mb-10">View cart</a>
-                            <a href="checkout.html" class="wc-checkout">Checkout</a>
+                            <a href="{% url 'checkout' %}" class="wc-checkout">Checkout</a>
                         </li>
                     </ul>
                 </div>

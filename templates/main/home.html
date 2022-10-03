@@ -144,14 +144,14 @@
                                     <div class="product__thumb fix">
                                         <div class="product-image w-img">
                                             <a href="{{item.get_absolute_url}}">
-                                                <img src="{{item.image}}" alt="product">
+                                                <img src="{{item.image}}" alt="product" max-height="240px">
                                             </a>
                                         </div>
                                         <div class="product__offer">
                                         <span class="discount">-{{item.discount}}%</span>
                                         </div>
                                         <div class="product-action">
-                                            <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                            <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModal-{{item.id}}">
                                                 <i class="fal fa-eye"></i>
                                                 <i class="fal fa-eye"></i>
                                             </a>
@@ -207,5 +207,109 @@
         </section>
         <!-- topsell__area-end -->
 
+
+<!-- shop modal start -->
+{% for item in products %}
+
+<div class="modal fade" id="productModal-{{item.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered product__modal" role="document">
+        <div class="modal-content">
+            <div class="product__modal-wrapper p-relative">
+                <div class="product__modal-close p-absolute">
+                    <button data-bs-dismiss="modal"><i class="fal fa-times"></i></button>
+                </div>
+                <div class="product__modal-inner">
+                    <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="product__modal-box">
+                            <div class="tab-content" id="modalTabContent">
+                                {% for obj in item.product_image_set.all %}
+                                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="nav-{{obj.id}}" role="tabpanel" aria-labelledby="nav-{{obj.id}}-tab">
+                                    <div class="product__modal-img w-img">
+                                        <img src="{{obj.image_url}}" alt="">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <ul class="nav nav-tabs" id="modalTab" role="tablist">
+                                {% for obj in item.product_image_set.all %}
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link {% if forloop.first %}active{% endif %}" id="nav-{{obj.id}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{obj.id}}" type="button" role="tab" aria-controls="nav-{{obj.id}}" aria-selected="false">
+                                    <img src="{{obj.image_url}}" alt="" height="85px" width="85px">
+                                    </button>
+                                </li>
+                                
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="product__modal-content">
+                            <h4><a href="{{item.get_absolute_url}}">{{item.name|truncatewords:12}}</a></h4>
+                            <div class="product__review d-sm-flex">
+                                <div class="rating rating__shop mb-10 mr-30">
+                                <ul>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                </ul>
+                                </div>
+                                <div class="product__add-review mb-15">
+                                <span>01 review</span>
+                                </div>
+                            </div>
+                            <div class="product__price">
+                                <span>₹{% call_sellprice item.price item.discount %}</span>&nbsp;&nbsp;<del>{{item.price}}</del>
+                            </div>
+                            <div class="product__modal-des mt-20 mb-15">
+                                <ul>
+                                    {{item.product_information|safe|truncatechars:200}}
+                                </ul>
+                            </div>
+                            <div class="product__stock mb-20">
+                                <span class="mr-10">Availability :</span>
+                                <span>{{item.availability}} in stock</span>
+                            </div>
+                            <div class="product__modal-form">
+                                <form action="{% url 'cart_add' item.id %}" method="POST">
+                                    {% csrf_token %}
+                                <div class="pro-quan-area d-lg-flex align-items-center">
+                                    <div class="product-quantity mr-20 mb-25">
+                                        <div class="cart-plus-minus p-relative"><input type="number" value="1" name="qty"/></div>
+                                    </div>
+                                    <div class="pro-cart-btn mb-25">
+                                        <button class="cart-btn" type="submit">Add to cart</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="product__stock mb-30">
+                                <ul>
+                                    <li>
+                                        <span class="sku mr-10">Model Name:</span>
+                                        <span>{{item.model_name}}</span>
+                                    </li>
+                                    <li>
+                                        <span class="cat mr-10">Categories:</span>
+                                        <span>{{item.categories}}</span>
+                                    </li>
+                                    <li>
+                                        <span class="tag mr-10">Tags:</span>
+                                        <span>{{item.tags}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- shop modal end -->
+{% endfor %}
          
 {% endblock %}    

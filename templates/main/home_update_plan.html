@@ -1,0 +1,123 @@
+<!-- moveing-text-area-start -->
+<section class="moveing-text-area">
+    <div class="container">
+        <div class="ovic-running">
+            <div class="wrap">
+                <div class="inner">
+                    <p class="item">Free UK Delivery - Return Over $100.00 ( Excluding Homeware )   |   Free UK Collect From Store</p>
+                    <p class="item">Design Week / 15% Off the website / Code: AYOSALE-2020</p>
+                    <p class="item">Always iconic. Now organic. Introducing the $20 Organic Tee.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- moveing-text-area-end -->
+
+
+<!-- topsell__area-start -->
+<section class="topsell__area-2 pt-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="section__head d-flex justify-content-between mb-10">
+                    <div class="section__title">
+                        <h5 class="st-titile">Top Selling Products</h5>
+                    </div>
+                    <div class="product__nav-tab"> 
+                        <ul class="nav nav-tabs" id="flast-sell-tab" role="tablist">
+
+
+                            {% for main_cat in main_category %}
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="{{main_cat.name}}-tab" data-bs-toggle="tab" data-bs-target="#{{main_cat.name}}" type="button" role="tab" aria-selected="false">{{main_cat.name}}</button>
+                            </li>
+                            {% endfor %}
+                            
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="tab-content" id="flast-sell-tabContent">
+
+
+
+
+
+
+                    {% for main_cat in main_category %}
+                    <div class="tab-pane fade" id="{{main_cat.name}}" role="tabpanel" aria-labelledby="{{main_cat.name}}-tab">
+                        <div class="product-bs-slider-2">
+                            <div class="product-slider-2 swiper-container">
+                                <div class="swiper-wrapper">
+                                    
+
+
+                                    <div class="product__item swiper-slide">
+                                        <div class="product__thumb fix">
+                                            <div class="product-image w-img">
+                                                <a href="product-details.html">
+                                                    <img src="{% static 'assets/img/product/tp-3.jpg' %}" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="product__offer">
+                                            <span class="discount">-9%</span>
+                                            </div>
+                                            <div class="product-action">
+                                                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                    <i class="fal fa-eye"></i>
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-heart"></i>
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-layer-group"></i>
+                                                    <i class="fal fa-layer-group"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product__content">
+                                            <h6><a href="product-details.html">Xbox Wireless Game Controller Pink</a></h6>
+                                            <div class="rating mb-5">
+                                                <ul>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                </ul>
+                                                <span>(01 review)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span>$200-$280</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__add-cart text-center">
+                                            <button type="button" class="cart-btn product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100">
+                                            Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- If we need navigation buttons -->
+                            </div>
+                            <div class="bs-button bs2-button-prev"><i class="fal fa-chevron-left"></i></div>
+                            <div class="bs-button bs2-button-next"><i class="fal fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- topsell__area-end -->

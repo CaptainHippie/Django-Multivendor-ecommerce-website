@@ -55,7 +55,7 @@
                                 {% for key,value in request.session.cart.items %}
                                <tr id="id{{value.id}}">
                                   <td class="product-thumbnail"><a href="{{value.image}}"><img src="{{value.image}}" alt=""></a></td>
-                                  <td class="product-name"><a href="{{value.link}}">{{value.name|truncatechars:50}}</a></td>
+                                  <td class="product-name"><a href="{% url 'product_detail' value.link %}">{{value.name|truncatechars:50}}</a></td>
                                   <td class="product-price"><span class="amount">₹ {{value.price}}</span></td>
                                   <td class="product-quantity w-25">
                                     <div class="row">

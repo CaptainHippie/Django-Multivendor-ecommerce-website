@@ -25,7 +25,8 @@ def HOME(request):
             'sliders': sliders,
             'banners': banners,
             'main_category': main_category,
-            'products': product
+            'products': product,
+            'range': range(1,3)
     }
     return render(request, 'main/home.html', context)
 
@@ -39,6 +40,7 @@ def PRODUCT_DETAILS(request, slug):
     context = {
         'product': product,
     }
+    print(type(product))
     return render(request, 'product/product_detail.html', context)
 
 def ERROR404(request):
@@ -135,13 +137,9 @@ def PRODUCT(request):
 
     FilterPrice = request.GET.get('FilterPrice')
     Int_FilterPrice = FilterPrice and int(FilterPrice)
-    ColorID = request.GET.get('ColorID')
-    if FilterPrice and ColorID:
-        product = Product.objects.filter(price__lte = Int_FilterPrice, color = ColorID)
-    elif FilterPrice:
+
+    if FilterPrice:
         product = Product.objects.filter(price__lte = Int_FilterPrice)
-    elif ColorID:
-        product = Product.objects.filter(color = ColorID)
     else:
         product = Product.objects.all()
 
@@ -162,17 +160,27 @@ def WISHLIST(request):
 def filter_data(request):
     categories = request.GET.getlist('category[]')
     brands = request.GET.getlist('brand[]')
+    colors = request.GET.getlist('color[]')
     product_num = request.GET.getlist('product_num[]')
 
+    FilterPrice = request.GET.get('FilterPrice')
+    Int_FilterPrice = FilterPrice and int(FilterPrice)
+
     allProducts = Product.objects.all().order_by('-id').distinct()
+
+    if FilterPrice:
+        allProducts = Product.objects.filter(price__lte = Int_FilterPrice).distinct()
+    else:
+        allProducts = Product.objects.all().order_by('-id').distinct()
+    
     if len(categories) > 0:
         allProducts = allProducts.filter(categories__id__in=categories).distinct()
-
     if len(product_num) > 0:
         allProducts = allProducts.all().order_by('-id')[0:1]
-
     if len(brands) > 0:
         allProducts = allProducts.filter(brand__id__in=brands).distinct()
+    if len(colors) > 0:
+        allProducts = allProducts.filter(color__id__in=colors).distinct()
 
     t = render_to_string('ajax/product.html', {'product': allProducts})
 
@@ -184,7 +192,11 @@ def filter_data(request):
 def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
-    cart.add(product=product)
+    if request.method == 'POST':
+        qty = int(request.POST['qty'])
+        cart.add(product=product,quantity=qty)
+    else:
+        cart.add(product=product)
     return redirect("cart_detail")
 
 
